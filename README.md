@@ -1,5 +1,8 @@
 # NEARKit
 
+[![CI](https://github.com/eteu-technologies/nearkit/actions/workflows/lint.yml/badge.svg)](https://github.com/eteu-technologies/nearkit/actions/workflows/lint.yml)
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
+
 CLI to interact with NEAR blockchain
 
 ## Running
