@@ -1,0 +1,6 @@
+.idea
+/.envrc
+/.envrc.local
+/nearkit
+/.direnv
+.#*
