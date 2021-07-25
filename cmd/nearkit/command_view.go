@@ -11,7 +11,10 @@ var viewCall = &cli.Command{
 	Usage: "Calls smart contract's view-only function",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:     "target-id",
+			Name: "target-id",
+			EnvVars: []string{
+				"NEARKIT_TARGET_ACCOUNT_ID",
+			},
 			Usage:    "Account to make this call to",
 			Required: true,
 		},

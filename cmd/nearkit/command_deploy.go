@@ -17,7 +17,10 @@ var deployContract = &cli.Command{
 	Usage: "Deploys a smart contract under specified account",
 	Flags: []cli.Flag{
 		&cli.PathFlag{
-			Name:     "wasm-file",
+			Name: "wasm-file",
+			EnvVars: []string{
+				"NEARKIT_DEPLOY_WASM_FILE",
+			},
 			Aliases:  []string{"wasmFile"}, // near-cli compatibility
 			Usage:    "WASM blob to deploy",
 			Required: true,

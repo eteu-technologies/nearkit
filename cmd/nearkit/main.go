@@ -19,11 +19,18 @@ func main() {
 			&cli.StringFlag{
 				Name:    "network-id",
 				Aliases: []string{"network"},
-				Value:   "testnet",
-				Usage:   "NEAR network to use",
+				EnvVars: []string{
+					"NEARKIT_NETWORK_ID",
+					"NEAR_ENV", // near-cli compatibility
+				},
+				Value: "testnet",
+				Usage: "NEAR network to use",
 			},
 			&cli.StringFlag{
-				Name:  "network-rpc-url",
+				Name: "network-rpc-url",
+				EnvVars: []string{
+					"NEARKIT_NETWORK_RPC_URL",
+				},
 				Usage: "NEAR network RPC URL",
 			},
 			/*
@@ -34,20 +41,32 @@ func main() {
 				},
 			*/
 			&cli.PathFlag{
-				Name:  "credentials-directory",
+				Name: "credentials-directory",
+				EnvVars: []string{
+					"NEARKIT_CREDENTIALS_DIRECTORY",
+				},
 				Usage: "Path to where credentials are stored",
 			},
 			&cli.PathFlag{
-				Name:  "credentials-base-directory",
-				Usage: "Path to substitue as home directory (~/.near-credentials)",
+				Name: "credentials-base-directory",
+				EnvVars: []string{
+					"NEARKIT_CREDENTIALS_BASE_DIRECTORY",
+				},
+				Usage: "Path to substitute as home directory (~/.near-credentials)",
 			},
 			&cli.PathFlag{
-				Name:        "credentials-file",
+				Name: "credentials-file",
+				EnvVars: []string{
+					"NEARKIT_CREDENTIALS_FILE",
+				},
 				Usage:       "Path to the credentials file for current action",
 				DefaultText: "Will be resolved according to the network id",
 			},
 			&cli.StringFlag{
-				Name:     "account-id",
+				Name: "account-id",
+				EnvVars: []string{
+					"NEARKIT_ACCOUNT_ID",
+				},
 				Aliases:  []string{"accountId"}, // near-cli compatibility
 				Usage:    "Account ID to use for transaction signing",
 				Required: true,

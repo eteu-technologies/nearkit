@@ -13,18 +13,27 @@ var changeCall = &cli.Command{
 	Usage:   "Calls smart contract's function",
 	Flags: []cli.Flag{
 		&cli.Uint64Flag{
-			Name:     "gas",
+			Name: "gas",
+			EnvVars: []string{
+				"NEARKIT_CALL_ATTACH_GAS",
+			},
 			Usage:    "Amount of gas to attach",
 			Value:    neartypes.DefaultFunctionCallGas,
 			Required: true,
 		},
 		&cli.StringFlag{
-			Name:  "deposit",
+			Name: "deposit",
+			EnvVars: []string{
+				"NEARKIT_CALL_ATTACH_DEPOSIT",
+			},
 			Usage: "Amount of NEAR tokens to attach",
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:     "target-id",
+			Name: "target-id",
+			EnvVars: []string{
+				"NEARKIT_TARGET_ACCOUNT_ID",
+			},
 			Usage:    "Account to make this call to",
 			Required: true,
 		},
