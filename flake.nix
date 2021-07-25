@@ -21,7 +21,10 @@
       rec {
         packages.nearkit = pkgs.callPackage ./default.nix { inherit rev; };
         defaultPackage = packages.nearkit;
-        defaultApp = packages.nearkit;
+        defaultApp = {
+          type = "app";
+          program = "${packages.nearkit}/bin/nearkit";
+        };
         shell = import ./shell.nix { inherit pkgs; };
       });
 
