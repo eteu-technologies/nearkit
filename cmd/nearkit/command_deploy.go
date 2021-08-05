@@ -8,8 +8,6 @@ import (
 	nearconfig "github.com/eteu-technologies/near-api-go/pkg/config"
 	nearaction "github.com/eteu-technologies/near-api-go/pkg/types/action"
 	"github.com/urfave/cli/v2"
-
-	"github.com/eteu-technologies/nearkit/internal/account"
 )
 
 var deployContract = &cli.Command{
@@ -30,8 +28,12 @@ var deployContract = &cli.Command{
 }
 
 func deployContractAction(cctx *cli.Context) (err error) {
-	nodeURL := cctx.String("network-rpc-url")
-	credential, err := account.LoadCredentials(cctx.String("credentials-file"))
+	nodeURL, err := ensureNodeURL(cctx)
+	if err != nil {
+		return err
+	}
+
+	credential, err := ensureCredential(cctx)
 	if err != nil {
 		return err
 	}
