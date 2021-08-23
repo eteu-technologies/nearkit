@@ -25,7 +25,13 @@
           type = "app";
           program = "${packages.nearkit}/bin/nearkit";
         };
-        shell = import ./shell.nix { inherit pkgs; };
+        shell = pkgs.mkShell {
+          buildInputs = [
+            pkgs.go
+            pkgs.golangci-lint
+            pkgs.gopls
+          ];
+        };
       });
 
 }
