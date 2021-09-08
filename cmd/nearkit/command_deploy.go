@@ -1,12 +1,14 @@
 package main
 
 import (
+	"crypto/sha256"
 	"io/ioutil"
 	"log"
 
 	nearclient "github.com/eteu-technologies/near-api-go/pkg/client"
 	nearconfig "github.com/eteu-technologies/near-api-go/pkg/config"
 	nearaction "github.com/eteu-technologies/near-api-go/pkg/types/action"
+	"github.com/mr-tron/base58"
 	"github.com/urfave/cli/v2"
 )
 
@@ -44,7 +46,10 @@ func deployContractAction(cctx *cli.Context) (err error) {
 		return err
 	}
 
-	log.Printf("Deploying '%s' to account '%s' (network '%s')", wasmFile, credential.AccountID, nodeURL)
+	codeHashRaw := sha256.Sum256(wasmBlob)
+	codeHash := base58.Encode(codeHashRaw[:])
+
+	log.Printf("Deploying '%s' (code hash: '%s') to account '%s' (network '%s')", wasmFile, codeHash, credential.AccountID, nodeURL)
 
 	client, err := nearclient.NewClient(nodeURL)
 	if err != nil {
