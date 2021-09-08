@@ -25,8 +25,8 @@
           type = "app";
           program = "${packages.nearkit}/bin/nearkit";
         };
-        shell = pkgs.mkShell {
-          buildInputs = [
+        devShell = pkgs.mkShell {
+          nativeBuildInputs = [
             pkgs.go
             pkgs.golangci-lint
             pkgs.gopls
