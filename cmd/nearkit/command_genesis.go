@@ -44,7 +44,7 @@ func genesisAction(cctx *cli.Context) (err error) {
 		encoder.SetIndent("", "    ")
 	}
 
-	err = encoder.Encode(res.Result)
+	err = encoder.Encode(res)
 
 	return
 }
