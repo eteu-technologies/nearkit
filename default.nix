@@ -6,6 +6,6 @@ buildGoModule rec {
 
   src = lib.cleanSource ./.;
 
-  vendorSha256 = "sha256-gmbdbmMr5Thr1JqTA8OuZKl8U8oWtbzqTk3XbBLBuXs=";
+  vendorSha256 = "sha256-PnwprAOOCHX4JMHucW0XLnUFSflwHuXr6qHA2oL8GPY=";
   subPackages = [ "cmd/nearkit" ];
 }
