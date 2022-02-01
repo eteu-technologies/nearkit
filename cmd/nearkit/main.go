@@ -72,6 +72,7 @@ func main() {
 			viewCall,
 			changeCall,
 			genesis,
+			genKey,
 		},
 		Before: before,
 	}
