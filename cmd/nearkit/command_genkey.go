@@ -19,6 +19,10 @@ var genKey = &cli.Command{
 			Aliases: []string{"pretty-print"},
 			Usage:   "Whether to pretty print the JSON",
 		},
+		&cli.BoolFlag{
+			Name:  "node-key",
+			Usage: `Whether key is meant to use with NEAR node. Renames "private_key" to "secret_key"`,
+		},
 		&cli.StringFlag{
 			Name:  "account",
 			Usage: "Account ID to use (optional)",
@@ -30,7 +34,8 @@ var genKey = &cli.Command{
 func genKeyAction(cctx *cli.Context) (err error) {
 	var key struct {
 		AccountID  string `json:"account_id,omitempty"`
-		PrivateKey string `json:"private_key"`
+		SecretKey  string `json:"secret_key,omitempty"`
+		PrivateKey string `json:"private_key,omitempty"`
 		PublicKey  string `json:"public_key"`
 	}
 
@@ -40,8 +45,18 @@ func genKeyAction(cctx *cli.Context) (err error) {
 		return
 	}
 
+	nodeKey := cctx.Bool("node-key")
+
 	key.AccountID = cctx.String("account")
-	key.PrivateKey = keyPair.PrivateEncoded()
+	if key.AccountID == "" && nodeKey {
+		key.AccountID = "node"
+	}
+
+	if pk := keyPair.PrivateEncoded(); nodeKey {
+		key.SecretKey = pk
+	} else {
+		key.PrivateKey = pk
+	}
 	key.PublicKey = keyPair.PublicKey.String()
 
 	encoder := json.NewEncoder(os.Stdout)
